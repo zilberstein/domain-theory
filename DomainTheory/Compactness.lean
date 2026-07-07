@@ -8,11 +8,21 @@ import DomainTheory.DCPO
 Based on Section 2.2.1 of Abramsky and Jung 1995
 -/
 
-def way_below {α : Type*} [DCPO α] (x y : α) : Prop :=
-    ∀ d : DSet α,
-      y ≤ d.dSup →
-      ∃ z ∈ d, x ≤ z
-infix:30 "≪" => way_below
+def WayBelow {α : Type*} [DCPO α] (x y : α) : Prop :=
+  ∀ d : DSet α,
+    y ≤ d.dSup →
+    ∃ z ∈ d, x ≤ z
+infix:30 " ≪ " => WayBelow
+
+namespace WayBelow
+
+lemma to_le {α : Type*} [DCPO α] {x y : α} (h : x ≪ y) : x ≤ y := by
+  have ⟨z, hz, hle⟩ :=
+    h (DSet.singleton y) (DSet.le_dSup (Set.mem_singleton _))
+  rcases Set.mem_singleton_iff.mp hz with rfl
+  exact hle
+
+end WayBelow
 
 def IsScottCompact {α : Type*} [DCPO α] (x : α) : Prop := x ≪ x
 
