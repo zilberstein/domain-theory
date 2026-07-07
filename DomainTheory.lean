@@ -1,1 +1,2 @@
-import DomainTheory.Basic
+import DomainTheory.Compactness
+import DomainTheory.DCPO
