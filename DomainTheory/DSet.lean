@@ -1,5 +1,16 @@
+/-
+Copyright (c) 2026 Noam Zilberstein. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Noam Zilberstein
+-/
 import Mathlib.Data.Set.Finite.Basic
 import Mathlib.Order.CompletePartialOrder
+
+/-!
+# Directed Sets
+
+A libarary for directed sets based on Definition 2.1.8 of Abramsky and Jung 1995.
+-/
 
 def DSet (α : Type*) [LE α] := { s : Set α // DirectedOn LE.le s ∧ s.Nonempty }
 
@@ -62,7 +73,7 @@ lemma image_mono {α β : Type*} [Preorder α] [Preorder β] {f : α → β}
   obtain ⟨x, hx, rfl⟩ := (Set.mem_image _ _ _).mp hy
   exact mem_image (hle hx)
 
--- Is this not in Mathlib?
+-- A directed set contains upper bounds of all of its finite subsets
 lemma finite_upper_bound {α : Type*} [Preorder α] {d : DSet α} {s : Set α}
     (hsub : s ⊆ d) (hfin : s.Finite) :
     ∃ x ∈ d, x ∈ upperBounds s := by

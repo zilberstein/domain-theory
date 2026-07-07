@@ -1,4 +1,12 @@
+/-
+Copyright (c) 2026 Noam Zilberstein. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Noam Zilberstein
+-/
 import DomainTheory.DCPO
+/-!
+Based on Section 2.2.1 of Abramsky and Jung 1995
+-/
 
 def way_below {α : Type*} [DCPO α] (x y : α) : Prop :=
     ∀ d : DSet α,

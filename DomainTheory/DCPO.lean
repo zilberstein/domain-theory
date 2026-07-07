@@ -1,10 +1,17 @@
+/-
+Copyright (c) 2026 Noam Zilberstein. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Noam Zilberstein
+-/
 import Mathlib.Order.CompletePartialOrder
 import Mathlib.Order.OmegaCompletePartialOrder
-
 import DomainTheory.DSet
+/-!
+  In Mathlib, `CompletePartialOrder` is pointed. Here is a version that does not
+   require the domain to be pointed, but requires directed sets to be nonempty.
+   It is based on Definition 2.1.13 of Abramsky and Jung 1995
+-/
 
--- In Mathlib, CompletePartialOrder is pointed. Here is a version that does not
--- require the domain to be pointed, but requires directed sets to be nonempty
 class DCPO (α : Type*) extends PartialOrder α where
   dSup : DSet α → α
   lubOfDirected (d : DSet α) : IsLUB d.val (dSup d)
