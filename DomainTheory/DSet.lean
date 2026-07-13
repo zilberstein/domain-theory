@@ -16,6 +16,7 @@ def DSet (α : Type*) [LE α] := { s : Set α // DirectedOn LE.le s ∧ s.Nonemp
 
 namespace DSet
 
+def carrier {α : Type*} [LE α] (d : DSet α) : Set α := d.val
 def directed {α : Type*} [LE α] (d : DSet α) : DirectedOn LE.le d.val := d.property.1
 def nonempty {α : Type*} [LE α] (d : DSet α) : d.val.Nonempty := d.property.2
 
@@ -86,6 +87,11 @@ lemma finite_upper_bound {α : Type*} [Preorder α] {d : DSet α} {s : Set α}
     rcases Set.mem_insert_iff.mp hz' with rfl | ht
     · exact hxz
     · exact (hub ht).trans hyz
+
+lemma finset_upper_bound {α : Type*} [Preorder α] (d : DSet α) (s : Finset α)
+    (hsub : ∀ x ∈ s, x ∈ d) :
+    ∃ x ∈ d, x ∈ upperBounds s :=
+  finite_upper_bound hsub s.finite_toSet
 
 def insert {X : Type} [Preorder X] {x : X} {d d' : DSet X}
     (hfin : d.val.Finite) (hsub : d ⊆ d') (hmem : x ∈ d') : DSet X :=
