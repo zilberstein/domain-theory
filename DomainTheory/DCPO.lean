@@ -24,11 +24,11 @@ namespace DSet
 
 def dSup {α : Type*} [DCPO α] : DSet α → α := DCPO.dSup
 
-def le_dSup {α : Type*} [DCPO α] {d : DSet α} {x : α} :
+lemma le_dSup {α : Type*} [DCPO α] {d : DSet α} {x : α} :
     x ∈ d → x ≤ d.dSup := by
   intro hx; exact (DCPO.lubOfDirected d).1 hx
 
-def dSup_le {α : Type*} [DCPO α] {d : DSet α} {x : α} :
+lemma dSup_le {α : Type*} [DCPO α] {d : DSet α} {x : α} :
     (∀ y ∈ d, y ≤ x) → d.dSup ≤ x := by
   intro hx; exact (DCPO.lubOfDirected d).2 hx
 

@@ -17,8 +17,8 @@ def DSet (α : Type*) [LE α] := { s : Set α // DirectedOn LE.le s ∧ s.Nonemp
 namespace DSet
 
 def carrier {α : Type*} [LE α] (d : DSet α) : Set α := d.val
-def directed {α : Type*} [LE α] (d : DSet α) : DirectedOn LE.le d.val := d.property.1
-def nonempty {α : Type*} [LE α] (d : DSet α) : d.val.Nonempty := d.property.2
+lemma directed {α : Type*} [LE α] (d : DSet α) : DirectedOn LE.le d.val := d.property.1
+lemma nonempty {α : Type*} [LE α] (d : DSet α) : d.val.Nonempty := d.property.2
 
 instance {α : Type*} [LE α] : HasSubset (DSet α) where
   Subset d d' := d.val ⊆ d'.val
